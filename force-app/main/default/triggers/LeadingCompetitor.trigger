@@ -6,8 +6,8 @@ trigger LeadingCompetitor on Opportunity (before insert, before update) {
 
         List<Decimal> CompetitorPrices = new List<Decimal>();
         CompetitorPrices.add(opp.Competitor_1_Price__c);
-        CompetitorPrices.add(opp.Competitor_1_Price__c);
-        CompetitorPrices.add(opp.Competitor_1_Price__c);
+        CompetitorPrices.add(opp.Competitor_2_Price__c);
+        CompetitorPrices.add(opp.Competitor_3_Price__c);
         
         //Add all our competitors in a list in order
         List<String> CompetitorNames = new List<String>();
@@ -30,6 +30,8 @@ trigger LeadingCompetitor on Opportunity (before insert, before update) {
         }
 
         // Populate the leading competitor field with the competitor matching the lowest price position
+
+        System.debug(lowestPricePosition);
 
         opp.Leading_Competitor__c = CompetitorNames.get(lowestPricePosition);      
         
