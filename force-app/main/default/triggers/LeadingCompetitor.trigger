@@ -24,8 +24,20 @@ trigger LeadingCompetitor on Opportunity (before insert, before update) {
 
             Decimal currentPrice = CompetitorPrices.get(i);
             if(lowestPrice == null || currentPrice < lowestPrice){
-                lowestPrice = currentPrice;
+                lowestPrice         = currentPrice;
                 lowestPricePosition = i;
+            }            
+        }
+
+        Decimal highestPrice;
+        Integer highestPricePosition;
+
+        for (Integer i = 0; i < CompetitorPrices.size(); i++) {
+
+            Decimal currentPrice = CompetitorPrices.get(i);
+            if(highestPrice == null || currentPrice > highestPrice){
+                highestPrice         = currentPrice;
+                highestPricePosition = i;
             }            
         }
 
@@ -33,7 +45,11 @@ trigger LeadingCompetitor on Opportunity (before insert, before update) {
 
         System.debug(lowestPricePosition);
 
-        opp.Leading_Competitor__c = CompetitorNames.get(lowestPricePosition);      
+        opp.Leading_Competitor__c        = CompetitorNames.get(lowestPricePosition); 
+        opp.Leading_Competitor_Price__c  = CompetitorPrices.get(lowestPricePosition);
+        
+        opp.Most_Expensive_Competitor__c = CompetitorNames.get(highestPricePosition);
+        opp.Expensive_Price__c           = CompetitorPrices.get(highestPricePosition);
         
         //System.debug(opp.Competitor_1__c ); 
         
