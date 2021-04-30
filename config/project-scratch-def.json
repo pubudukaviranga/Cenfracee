@@ -1,6 +1,8 @@
 {
-  "orgName": "Demo company",
+  "orgName": "Cenfracee scratch1",
   "edition": "Developer",
+  "description": "Practice scratch org1",
+  "hasSampleData": true,
   "features": ["EnableSetPasswordInApi"],
   "settings": {
     "lightningExperienceSettings": {
